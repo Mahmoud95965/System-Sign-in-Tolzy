@@ -114,7 +114,7 @@ const AuthPage: React.FC = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">لإبداعك</span>
           </h1>
           <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-            انضم إلى الآلاف من المبدعين وصناع المحتوى الذين يستخدمون منصتنا للوصول إلى أكثر من 100 أداة ذكاء اصطناعي متطورة.
+            انضم إلى الآلاف من المبدعين وصناع المحتوى الذين يستخدمون منصتنا للوصول إلى أكثر من +500 أداة ذكاء اصطناعي متطورة.
           </p>
 
           {/* Feature List */}
