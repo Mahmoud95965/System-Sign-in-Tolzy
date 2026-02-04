@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RTL Support */
+html[dir="rtl"] {
+  text-align: right;
+}
+
+/* Fix input directions for search fields */
+input[type="search"],
+input[type="text"],
+input[type="email"] {
+  direction: rtl;
+}
+
+/* Ensure LTR for English content */
+.ltr {
+  direction: ltr;
+}
+
+/* Additional styles for better Arabic text rendering */
+/* Global Font Settings */
+html {
+  font-size: 18px;
+  /* Increased base size */
+}
+
+body {
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-almarai), 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  /* Medium weight for "bold" feel */
+  line-height: 1.6;
+}
+
+/* Simple and Stable Animations for Profile Page */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.4s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effects with smooth transitions */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Article HTML Content Styles */
+.article-content {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: rgb(30 41 59);
+}
+
+.dark .article-content {
+  color: rgb(226 232 240);
+}
+
+.article-content p {
+  margin-bottom: 1.25rem;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: rgb(15 23 42);
+}
+
+.dark .article-content h1,
+.dark .article-content h2,
+.dark .article-content h3 {
+  color: rgb(241 245 249);
+}
+
+.article-content h1 {
+  font-size: 2rem;
+}
+
+.article-content h2 {
+  font-size: 1.5rem;
+}
+
+.article-content h3 {
+  font-size: 1.25rem;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-bottom: 1.25rem;
+  padding-right: 2rem;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.article-content blockquote {
+  border-right: 4px solid rgb(99 102 241);
+  padding-right: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: rgb(71 85 105);
+}
+
+.dark .article-content blockquote {
+  border-right-color: rgb(129 140 248);
+  color: rgb(148 163 184);
+}
+
+.article-content code {
+  background-color: rgb(241 245 249);
+  color: rgb(220 38 38);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875em;
+  font-family: 'Courier New', monospace;
+}
+
+.dark .article-content code {
+  background-color: rgb(30 41 59);
+  color: rgb(248 113 113);
+}
+
+.article-content a {
+  color: rgb(99 102 241);
+  text-decoration: underline;
+}
+
+.article-content a:hover {
+  color: rgb(79 70 229);
+}
+
+.dark .article-content a {
+  color: rgb(129 140 248);
+}
+
+.dark .article-content a:hover {
+  color: rgb(165 180 252);
+}
