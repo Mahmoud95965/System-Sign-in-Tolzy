@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Cairo } from 'next/font/google';
 import { AuthProvider } from '@/src/context/AuthContext';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const cairo = Cairo({
+    subsets: ['arabic', 'latin'],
+    display: 'swap',
+});
 
 export const metadata: Metadata = {
     title: 'Tolzy Sign In',
@@ -17,7 +20,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="ar" dir="rtl">
-            <body className={inter.className}>
+            <body className={cairo.className}>
                 <AuthProvider>
                     {children}
                 </AuthProvider>

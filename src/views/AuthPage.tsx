@@ -36,14 +36,14 @@ const AuthPage: React.FC = () => {
       } else if (isLogin) {
         await signInWithEmail(email, password);
         if (window.location.hostname === 'tolzy.me') {
-          window.location.href = 'https://app.tolzy.me/dashboard';
+          window.location.href = 'https://www.tolzy.me';
         } else {
           router.push('/dashboard');
         }
       } else {
         await signUpWithEmail(email, password, firstName, lastName);
         if (window.location.hostname === 'tolzy.me') {
-          window.location.href = 'https://app.tolzy.me/dashboard';
+          window.location.href = 'https://www.tolzy.me';
         } else {
           router.push('/dashboard');
         }
@@ -60,7 +60,7 @@ const AuthPage: React.FC = () => {
       setIsLoading(true);
       await signInWithGoogle();
       if (window.location.hostname === 'tolzy.me') {
-        window.location.href = 'https://app.tolzy.me/dashboard';
+        window.location.href = 'https://www.tolzy.me';
       } else {
         router.push('/dashboard');
       }
@@ -76,7 +76,7 @@ const AuthPage: React.FC = () => {
       setIsLoading(true);
       await signInWithGithub();
       if (window.location.hostname === 'tolzy.me') {
-        window.location.href = 'https://app.tolzy.me/dashboard';
+        window.location.href = 'https://www.tolzy.me';
       } else {
         router.push('/dashboard');
       }
