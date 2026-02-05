@@ -74,6 +74,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(firebaseUser);
 
       if (firebaseUser) {
+        // Set cookie for ALL users on .tolzy.me domain
+        try {
+          const token = await firebaseUser.getIdToken();
+          // cookie settings: 
+          // domain=.tolzy.me -> allows sharing with main domain and other subdomains
+          // path=/ -> accessible everywhere
+          // max-age=2592000 -> 30 days
+          // Secure -> only sent over HTTPS
+          // SameSite=Lax -> allows sending cookie when navigating from external sites
+          document.cookie = `tolzy_token=${token}; domain=.tolzy.me; path=/; max-age=2592000; Secure; SameSite=Lax`;
+        } catch (e) {
+          console.error("Error setting session cookie:", e);
+        }
+
         try {
           // Fetch additional user data including plan
           const userDocRef = doc(db, 'users', firebaseUser.uid);
@@ -124,21 +138,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               createdAt: new Date().toISOString()
             });
             setIsAdmin(true);
-            // Set Security Cookie for Middleware
-            document.cookie = "tolzy_admin_session=mahmoud_secure_session; path=/; max-age=86400; Secure; SameSite=Strict";
+            // Set Security Cookie for Middleware - ALSO on .tolzy.me
+            document.cookie = "tolzy_admin_session=mahmoud_secure_session; domain=.tolzy.me; path=/; max-age=86400; Secure; SameSite=Lax";
           } catch (error) {
             console.log('Admin role check passed (local). Firestore write skipped (permissions).');
             setIsAdmin(true); // Still set as admin locally
-            document.cookie = "tolzy_admin_session=mahmoud_secure_session; path=/; max-age=86400; Secure; SameSite=Strict";
+            document.cookie = "tolzy_admin_session=mahmoud_secure_session; domain=.tolzy.me; path=/; max-age=86400; Secure; SameSite=Lax";
           }
         } else {
           setIsAdmin(false);
-          document.cookie = "tolzy_admin_session=; path=/; max-age=0; Secure; SameSite=Strict";
+          // Clear admin cookie if not admin
+          document.cookie = "tolzy_admin_session=; domain=.tolzy.me; path=/; max-age=0; Secure; SameSite=Lax";
         }
       } else {
         setUserProfile(null);
         setIsAdmin(false);
-        document.cookie = "tolzy_admin_session=; path=/; max-age=0; Secure; SameSite=Strict";
+        // Clear all cookies on logout/no user
+        document.cookie = "tolzy_token=; domain=.tolzy.me; path=/; max-age=0; Secure; SameSite=Lax";
+        document.cookie = "tolzy_admin_session=; domain=.tolzy.me; path=/; max-age=0; Secure; SameSite=Lax";
       }
       setLoading(false);
     });
@@ -302,7 +319,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(null);
       setUserProfile(null);
       setIsAdmin(false);
-      document.cookie = "tolzy_admin_session=; path=/; max-age=0; Secure; SameSite=Strict";
+      // Clear cookies with domain specificity
+      document.cookie = "tolzy_token=; domain=.tolzy.me; path=/; max-age=0; Secure; SameSite=Lax";
+      document.cookie = "tolzy_admin_session=; domain=.tolzy.me; path=/; max-age=0; Secure; SameSite=Lax";
     } catch (error) {
       console.error('Logout error:', error);
       setError('حدث خطأ أثناء تسجيل الخروج');
