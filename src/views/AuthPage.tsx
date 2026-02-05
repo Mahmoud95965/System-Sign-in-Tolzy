@@ -35,17 +35,17 @@ const AuthPage: React.FC = () => {
         setShowForgotPassword(false);
       } else if (isLogin) {
         await signInWithEmail(email, password);
-        if (window.location.hostname === 'tolzy.me') {
-          window.location.href = 'https://www.tolzy.me';
-        } else {
+        if (window.location.hostname.includes('localhost')) {
           router.push('/dashboard');
+        } else {
+          window.location.href = 'https://www.tolzy.me';
         }
       } else {
         await signUpWithEmail(email, password, firstName, lastName);
-        if (window.location.hostname === 'tolzy.me') {
-          window.location.href = 'https://www.tolzy.me';
-        } else {
+        if (window.location.hostname.includes('localhost')) {
           router.push('/dashboard');
+        } else {
+          window.location.href = 'https://www.tolzy.me';
         }
       }
     } catch (error) {
@@ -59,10 +59,10 @@ const AuthPage: React.FC = () => {
     try {
       setIsLoading(true);
       await signInWithGoogle();
-      if (window.location.hostname === 'tolzy.me') {
-        window.location.href = 'https://www.tolzy.me';
-      } else {
+      if (window.location.hostname.includes('localhost')) {
         router.push('/dashboard');
+      } else {
+        window.location.href = 'https://www.tolzy.me';
       }
     } catch (error) {
       console.error('Google sign in error:', error);
@@ -75,10 +75,10 @@ const AuthPage: React.FC = () => {
     try {
       setIsLoading(true);
       await signInWithGithub();
-      if (window.location.hostname === 'tolzy.me') {
-        window.location.href = 'https://www.tolzy.me';
-      } else {
+      if (window.location.hostname.includes('localhost')) {
         router.push('/dashboard');
+      } else {
+        window.location.href = 'https://www.tolzy.me';
       }
     } catch (error) {
       console.error('Github sign in error:', error);
